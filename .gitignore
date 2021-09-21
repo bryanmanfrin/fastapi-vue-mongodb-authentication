@@ -1,1 +1,3 @@
 starter-template
+frontend/node_modules
+service/.venv
