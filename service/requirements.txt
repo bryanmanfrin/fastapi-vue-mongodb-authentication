@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+httpx
+motor
+aiofiles
+wheel
+python-multipart
+python-jose
+passlib[bcrypt]

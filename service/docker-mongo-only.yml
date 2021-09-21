@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mongodb: # name of the container => name that can be resolved by internal Docker DNS
+    image: mongo
+    ports:
+      - "28000:27017"
+    command: mongod --bind_ip 0.0.0.0
+    volumes:
+      - mongodbvol:/data/db
+
+volumes:
+  mongodbvol:

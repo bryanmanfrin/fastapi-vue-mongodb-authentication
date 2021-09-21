@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  todo-server: # name of the container => name that can be resolved by internal Docker DNS
+    build: . # name of the directory that we want to build (would be "service" if docker-compose file was one lvl above)
+    ports:
+      - "8000:8000"
+    networks:
+      - tuto-net
+    depends_on: 
+      - mongodb
+
+  mongodb: # name of the container => name that can be resolved by internal Docker DNS
+    image: mongo
+    ports:
+      - "28000:27017"
+    networks:
+      tuto-net:
+        aliases: 
+          - database  # when in tuto-net, mongodb is reachable with either host name "mongodb" or "database"
+                      # this specific alias would not be applied within another network except if mentionned there too 
+    command: mongod --bind_ip 0.0.0.0
+    volumes:
+      - mongodbvol:/data/db
+
+networks: 
+  tuto-net:
+
+volumes:
+  mongodbvol:
